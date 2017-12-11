@@ -1,0 +1,79 @@
+.login_account {
+	background-image:url(images/login_username.png) !important ;
+	background-repeat:no-repeat;   
+    background-position:left; 
+    padding-left:12px;  
+}
+.login_password {
+	background-image:url(images/login_password.png) !important ;
+	background-repeat:no-repeat;   
+    background-position:left; 
+    padding-left:12px;  
+}
+/*index.html 登录*/
+.main_login {
+	font-size : 15pt;
+	color:#FFFAFA;
+	/* cursor:move; */
+	cursor:url(images\cursor.png),auto;
+}
+/*index.html 注册*/
+.main_register {
+	font-size : 15pt;
+	color:#FFFAFA;
+	cursor:move;
+}
+/*我的系统 cls*/
+.main_systemName{
+	font-size : 20pt;
+	color:#FFFAFA;
+}
+/*登录注册 cls*/
+.button_cls{
+	font-size : 15pt;
+	color:#FF8C69;
+	cursor:move;
+}
+/*分类值 overCls属性*/
+.main_button_cls{
+	font-size : 10pt;
+	color:#CD3700;
+	cursor:move;
+}
+/*分类*/
+.main_big_cls{
+	font-size : 15pt;
+	Position: absolute; /* absolute; relative; static; */
+	left: 40px;
+    top: 15px;
+	color:#242424;
+}
+/*分类值*/
+.main_font_cls{
+	font-size : 12pt;
+	Position: relative; /* relative; static; */
+	left: 100px;
+    top: 20px;
+    margin-left:30px; /*左边界值*/
+	color:#242424;
+}
+.main_big_cls2{
+	font-size : 15pt;
+	Position: absolute; /* absolute; relative; static; */
+	left: 50px;
+    top: 40px;
+	color:#242424;
+}
+/*分类值*/
+.main_font_cls2{
+	font-size : 12pt;
+	Position: relative; /* absolute; relative; static; */
+	left: 100px;
+    margin-top: 20px;
+    margin-left:30px; /*左边界值*/
+	color:#242424;
+}
+/*图片样式*/
+.img_cls{
+	margin-top:10px ;
+}

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost/h524?useUnicode=true&amp;characterEncoding=UTF-8</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/p2p/entity/User.hbm.xml</value>
+				<value>com/p2p/entity/Movie.hbm.xml</value>
+				<value>com/p2p/entity/Admin.hbm.xml</value>
+				<value>com/p2p/entity/Audience.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 声明一个 Hibernate 3 的事务管理器供代理类自动管理事务用 -->
+	<!--<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean> -->
+	
+	<!-- UserDao -->
+	<bean id="userDAO" class="com.p2p.dao.UserDAO">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate"/>
+		</property>
+	</bean>
+	
+	<!-- MovieDao -->
+	<bean id="movieDAO" class="com.p2p.dao.MovieDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate"/>
+		</property>
+	</bean>
+	
+	<!-- <bean id="movieDAOProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="movieDAO" />
+		</property>
+
+		<property name="transactionAttributes">
+			<props>
+				这里的方法签名可以精确到方法全配置上
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean> -->
+	
+	<bean id="loginAction" class="com.p2p.action.LoginAction">
+		<property name="userDAO">
+			<ref bean="userDAO"/>
+		</property>
+	</bean>
+	<bean id="userAddAction" class="com.p2p.action.UserAddAction">
+		<property name="userDAO">
+			<ref bean="userDAO"/>
+		</property>
+	</bean>
+	<bean id="getUserAction" class="com.p2p.action.GetUserAction">
+		<property name="userDAO">
+			<ref bean="userDAO"/>
+		</property>
+	</bean>
+	<bean id="movieAction" class="com.p2p.action.MovieAction">
+		<property name="movieDAO">
+			<ref bean="movieDAO"/>
+		</property>
+	</bean>
+	<bean id="deleteMovieAction" class="com.p2p.action.DeleteMovieAction">
+		<property name="movieDAO">
+			<ref bean="movieDAO"/> 
+		</property>
+	</bean>
+	<bean id="updateMovieAction" class="com.p2p.action.UpdateMovieAction">
+		<property name="movieDAO">
+			<ref bean="movieDAO"/> 
+		</property>
+	</bean>
+	<bean id="movieAddAction" class="com.p2p.action.MovieAddAction">
+		<property name="movieDAO">
+			<ref bean="movieDAO"/> 
+		</property>
+	</bean>
+	<bean id="getBookAction" class="com.p2p.action.GetBookAction">
+		<property name="movieDAO">
+			<ref bean="movieDAO"/> 
+		</property>
+	</bean>
+</beans>
